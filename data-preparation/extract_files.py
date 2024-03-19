@@ -1,24 +1,24 @@
-import shutil
+import zipfile
 import os
 
-# Get the path to the extracted 'Dataset' directory
-extracted_dataset_directory = os.path.join(extract_to_directory, 'Dataset')
+def extract_files(zip_file, extract_dir):
+    extracted_files = []
+    with zipfile.ZipFile(zip_file, 'r') as zip_ref:
+        # Check if the Dataset directory exists in the zip file
+        if 'Dataset' not in zip_ref.namelist():
+            print("Error: Dataset directory not found in the zip file.")
+            return
+        
+        # Extract files from the Dataset directory
+        for file_info in zip_ref.infolist():
+            if file_info.filename.startswith('Dataset/') and not file_info.is_dir():
+                extracted_files.append(file_info.filename.split('/', 1)[1])  # Extract the file name without the 'Dataset/' prefix
+                zip_ref.extract(file_info, extract_dir)
+        print("Files extracted successfully.")
+    return extracted_files
 
-# List the contents of the 'Dataset' directory
-dataset_contents = os.listdir(extracted_dataset_directory)
-
-# Move each item from the 'Dataset' directory to the extraction directory
-for item in dataset_contents:
-    # Get the full path of the item
-    item_path = os.path.join(extracted_dataset_directory, item)
-    
-    # Move the item to the extraction directory
-    shutil.move(item_path, extract_to_directory)
-
-# Remove the empty 'Dataset' directory
-os.rmdir(extracted_dataset_directory)
-
-# List the extracted files again
-extracted_files = os.listdir(extract_to_directory)
-print("Extracted files:", extracted_files)
-
+if __name__ == "__main__":
+    zip_file = "DFDC.zip"  # Replace with the name of your zip file
+    extract_dir = "extracted_files"  # Replace with the directory where you want to extract files
+    extracted_files = extract_files(zip_file, extract_dir)
+    print("Extracted files:", extracted_files)
