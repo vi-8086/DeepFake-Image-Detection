@@ -1,4 +1,5 @@
 import shutil
+import os
 
 # Get the path to the extracted 'Dataset' directory
 extracted_dataset_directory = os.path.join(extract_to_directory, 'Dataset')
