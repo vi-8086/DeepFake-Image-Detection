@@ -28,7 +28,7 @@ def extract_files(zip_file, extract_dir):
     for class_name, subdir_counts in before_extraction.items():
         num_files_to_extract[class_name] = {}
         for subdir, count in subdir_counts.items():
-            num_files_to_extract[class_name][subdir] = count // 10
+            num_files_to_extract[class_name][subdir] = count // 0.1
 
     extracted_count = {}
     for file_path in random.sample(extracted_files, sum(sum(counts.values()) for counts in num_files_to_extract.values())):
@@ -48,8 +48,8 @@ def extract_files(zip_file, extract_dir):
     return before_extraction, after_extraction
 
 if __name__ == "__main__":
-    zip_file = "/content/drive/MyDrive/Colab Notebooks/DeepFake Image Detection/DFDC.zip"  # Replace with the path to your zip file
-    extract_dir = "/content/extracted_files"  # Replace with the directory where you want to extract files
+    zip_file = "/content/drive/MyDrive/Colab Notebooks/DeepFake Image Detection/DFDC.zip"  
+    extract_dir = "/content/extracted_files" 
 
     before_extraction, after_extraction = extract_files(zip_file, extract_dir)
 
