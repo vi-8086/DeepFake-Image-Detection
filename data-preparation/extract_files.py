@@ -28,7 +28,7 @@ def extract_files(zip_file, extract_dir):
     for class_name, subdir_counts in before_extraction.items():
         num_files_to_extract[class_name] = {}
         for subdir, count in subdir_counts.items():
-            num_files_to_extract[class_name][subdir] = count // 0.1
+            num_files_to_extract[class_name][subdir] = int(0.1 * count)
 
     extracted_count = {}
     for file_path in random.sample(extracted_files, sum(sum(counts.values()) for counts in num_files_to_extract.values())):
