@@ -59,7 +59,7 @@ if __name__ == "__main__":
         for subdir, count in subdir_counts.items():
             print(f"  {subdir}: {count}")
 
-    print("\nCount of files after extracting 50% while preserving balance:")
+    print("\nCount of files after extracting 10% while preserving balance:")
     for class_name, subdir_counts in after_extraction.items():
         print(f"{class_name}:")
         for subdir, count in subdir_counts.items():
